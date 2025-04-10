@@ -1,0 +1,25 @@
+body {
+    padding-bottom: 2rem;
+    background-color: #f8f9fa;
+  }
+  
+  .card {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .navbar {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .btn {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn:disabled {
+    cursor: not-allowed;
+  }
+  
+  .invalid-feedback {
+    display: block;
+  }

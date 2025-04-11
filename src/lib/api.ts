@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { TextExtractResponse, FactCheckResponse } from '../types';
 
-const API_BASE_URL = 'https://twitter.tikvid.xyz';
+const API_BASE_URL = 'https://truthcheck-dapps.onrender.com/';
 
 export const extractTextFromTweet = async (url: string): Promise<string> => {
   try {

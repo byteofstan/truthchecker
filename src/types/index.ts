@@ -4,6 +4,9 @@ export interface TextExtractResponse {
   
   export interface FactCheckResponse {
     fact_check_result: string;
+    claim: string;
+    explanation: string;
+    label: string;
   }
   
   export interface FactCheckRequest {

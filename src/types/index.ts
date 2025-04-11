@@ -7,6 +7,7 @@ export interface TextExtractResponse {
     claim: string;
     explanation: string;
     label: string;
+    transaction_hash: string;
   }
   
   export interface FactCheckRequest {
@@ -18,4 +19,5 @@ export interface TextExtractResponse {
     error: string | null;
     extractedText: string | null;
     factCheckResult: string | null;
+    transactionHash: string | null;
   }

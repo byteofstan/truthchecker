@@ -9,11 +9,13 @@ interface FactCheckResult {
 interface ResultDisplayProps {
   extractedText: string;
   factCheckResult: string | FactCheckResult;
+  transactionHash: string;
 }
 
 const ResultDisplay: React.FC<ResultDisplayProps> = ({
   extractedText,
   factCheckResult,
+  transactionHash
 }) => {
   const parsedResult = typeof factCheckResult === 'string' 
     ? JSON.parse(factCheckResult) 
@@ -60,11 +62,13 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
               
               <div className="claim-section mb-3 p-3 bg-light rounded">
                 <h4 className="h6">Claim:</h4>
-                <p className="mb-0 fw-bold">"{parsedResult.claim}"</p>
+                <p className="mb-0 fw-bold text-truncate" style={{ maxWidth: '100%' }}>
+                  "{parsedResult.claim}"
+                </p>
               </div>
 
               {parsedResult.explanation && (
-                <div className="explanation-section mb-3">
+                <div className="explanation-section mb-3" style={{ maxHeight: '200px', overflowY: 'auto' }}>
                   <h4 className="h6">Explanation:</h4>
                   <p>{parsedResult.explanation}</p>
                 </div>
@@ -72,12 +76,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
 
               <div className="verification-footer mt-4 pt-3 border-top">
                 <div className="d-flex justify-content-between align-items-center">
-                  <span className="text-muted small">Verified on Blockchain: #abc123</span>
-                  <div>
-                    <button className="btn btn-outline-primary btn-sm me-2">
-                      Check Another
-                    </button>
-                  </div>
+                  <span className="text-muted small" style={{ maxWidth: '100%' }}>Verified on Blockchain: {transactionHash}</span>
                 </div>
               </div>
             </div>
@@ -105,6 +104,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
         }
         .explanation-section {
           line-height: 1.6;
+        }
+        .text-truncate {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       `}</style>
     </div>

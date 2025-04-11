@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { TextExtractResponse, FactCheckResponse } from '../types';
 
-const API_BASE_URL = 'https://truthcheck-dapps.onrender.com/';
+const API_BASE_URL = 'https://truthcheck-dapps.onrender.com';
 
 export const extractTextFromTweet = async (url: string): Promise<string> => {
   try {
@@ -15,7 +15,7 @@ export const extractTextFromTweet = async (url: string): Promise<string> => {
   }
 };
 
-export const factCheckText = async (text: string): Promise<string> => {
+export const factCheckText = async (text: string): Promise<{fact_check_result: string, transaction_hash: string}> => {
   try {
     const response = await axios.post<FactCheckResponse>(
       `${API_BASE_URL}/fact-check`,
@@ -26,7 +26,10 @@ export const factCheckText = async (text: string): Promise<string> => {
         }
       }
     );
-    return response.data.fact_check_result;
+    return {
+      fact_check_result: response.data.fact_check_result,
+      transaction_hash: response.data.transaction_hash
+    };
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error('Fact check error:', error.response?.data);

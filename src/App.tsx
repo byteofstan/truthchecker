@@ -13,6 +13,7 @@ const App: React.FC = () => {
     error: null,
     extractedText: null,
     factCheckResult: null,
+    transactionHash: null,
   });
 
   const handleSubmit = async (url: string) => {
@@ -21,17 +22,19 @@ const App: React.FC = () => {
       error: null,
       extractedText: null,
       factCheckResult: null,
+      transactionHash: null,
     });
 
     try {
       const extractedText = await extractTextFromTweet(url);
-      const factCheckResult = await factCheckText(extractedText);
+      const { fact_check_result, transaction_hash } = await factCheckText(extractedText);
 
       setState({
         isLoading: false,
         error: null,
         extractedText,
-        factCheckResult,
+        factCheckResult: fact_check_result,
+        transactionHash: transaction_hash,
       });
     } catch (error) {
       setState({
@@ -39,6 +42,7 @@ const App: React.FC = () => {
         error: error instanceof Error ? error.message : 'An unknown error occurred',
         extractedText: null,
         factCheckResult: null,
+        transactionHash: null,
       });
     }
   };
@@ -49,6 +53,7 @@ const App: React.FC = () => {
       error: null,
       extractedText: null,
       factCheckResult: null,
+      transactionHash: null,
     });
   };
 
@@ -82,6 +87,7 @@ const App: React.FC = () => {
           <ResultDisplay
             extractedText={state.extractedText}
             factCheckResult={state.factCheckResult}
+            transactionHash={state.transactionHash || ''}
           />
         )}
       </Container>
